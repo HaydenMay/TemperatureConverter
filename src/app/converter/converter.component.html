@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <div style="text-align: center">
+        <h3>Welcome to the Temperture Converter</h3>
+        <h6>
+          The Temperture should auto-update when you navigate away from the
+          input field
+        </h6>
+        <hr />
+        <div>
+          <label> Please input a Temperture: (nothing will equal 0)</label>
+          <input
+            style="margin-left: 3px"
+            type="number"
+            id="temp"
+            name="temp"
+            (blur)="setTemperature(temp.value)"
+            #temp
+          />
+          <div *ngIf="isInputted">
+            <p>Your inputted temp is: {{ temperature }}</p>
+            
+            <div class="radio" *ngFor="let type of tempTypes">
+              <label>
+                <input
+                  type="checkbox"
+                  [value]="type"
+                  (input)="onConversionChoice(type)"
+                />convert to: {{ type }}
+              </label>
+              <div *ngIf="type === 'Celsius'">
+                <label>
+                  Converting to {{ type }}
+                  <button class="btn button-primary" (click)="onSubmit(type)">
+                    Convert
+                  </button>
+                </label>
+              </div>
+              <div *ngIf="type === 'Fairenheit'">
+                <label>
+                  Converting to {{ type }}
+                  <button class="btn button-primary" (click)="onSubmit(type)">
+                    Convert
+                  </button>
+                </label>
+              </div>
+            </div>
+
+            <div *ngIf="converted !== ''">
+              <h4 *ngIf="tempConversionType === 'Fairenheit'">
+                Your Converted temp from {{temperature}} Fairenheit to {{ tempConversionType }}
+                is {{ converted }} degrees
+                <button class="btn btn-warning" (click)="onClear()">
+                  Clear
+                </button>
+              </h4>
+              <h4 *ngIf="tempConversionType === 'Celsius'">
+                Your Converted temp from {{temperature}} Celsius to {{ tempConversionType }} is
+                {{ converted }} degrees
+                <button class="btn btn-warning" (click)="onClear()">
+                  Clear
+                </button>
+              </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
